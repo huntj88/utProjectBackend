@@ -19,7 +19,7 @@ module.exports =
                 else{
 
                     connection.release();
-                    res.send("success");
+                    res.send(""+results.insertId);
                 }
             });
         });

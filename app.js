@@ -31,18 +31,20 @@ app.use('/users', users);
 
 function checkIfUserLegit(req, res, next) {
   console.log(req.url);
-  /*if (req.body.apiKey == "dev123") {
+  if (req.body.apiKey == "dev123") {
     console.log("dev api_key in use. are you sure its testing only?");
     next();
   }
   else if(req.cookies.userID==undefined&&contains.call(whiteList, req.url)){
     next();
   }
+  else if(req.url.indexOf("/items/image/") > -1) {
+    next();
+  }
   else {
     var auth = require('./utils/authorizeUser');
     auth.authorizeUser(req,nextOrNot, next, res);
-  }*/
-  next();
+  }
 }
 
 function nextOrNot(valid, next, res) {
