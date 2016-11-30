@@ -40,8 +40,13 @@ router.post('/getCategories', function (req, res, next) {
 });
 
 router.post('/uploadImage', function (req, res, next) {
-    console.log(req);
-    res.send("uploaded");
+    var request = require('./itemImageFunctions');
+    request.uploadImage(req,res);
+});
+
+router.get('/image/:resource', function(req, res, next) {
+    var path = require('path');
+    res.sendFile(path.join('/var/node/utProject/uploads/'+req.params.resource));
 });
 
 

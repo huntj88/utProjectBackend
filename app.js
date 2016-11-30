@@ -31,7 +31,7 @@ app.use('/users', users);
 
 function checkIfUserLegit(req, res, next) {
   console.log(req.url);
-  if (req.body.apiKey == "dev123") {
+  /*if (req.body.apiKey == "dev123") {
     console.log("dev api_key in use. are you sure its testing only?");
     next();
   }
@@ -41,7 +41,8 @@ function checkIfUserLegit(req, res, next) {
   else {
     var auth = require('./utils/authorizeUser');
     auth.authorizeUser(req,nextOrNot, next, res);
-  }
+  }*/
+  next();
 }
 
 function nextOrNot(valid, next, res) {
