@@ -6,7 +6,7 @@ module.exports =
 
     getByCategory: function(req, res){
 
-        var queryString = "SELECT categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price FROM items JOIN users USING(userID) JOIN categories USING(categoryID) WHERE categoryID = ? order by itemID desc";
+        var queryString = "SELECT categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price,GROUP_CONCAT(imageName) as imageNames FROM items JOIN users USING(userID) JOIN categories USING(categoryID) LEFT JOIN images USING(itemID) WHERE categoryID = ? GROUP BY itemID order by itemID desc";
         var mysqlPool = require("../../utils/mysqlPool");
         mysqlPool.getConnection(function (err,connection) {
             connection.query(queryString,[req.body.categoryID],function (error,results,fields) {
@@ -28,7 +28,7 @@ module.exports =
 
     getByItemID: function (req,res) {
 
-        var queryString = "select categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price from items join users USING(userID) JOIN categories USING(categoryID) where itemID = ? order by itemID desc";
+        var queryString = "select categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price,GROUP_CONCAT(imageName) as imageNames from items join users USING(userID) JOIN categories USING(categoryID) LEFT JOIN images USING(itemID) where itemID = ? GROUP BY itemID order by itemID desc";
 
         var mysqlPool = require("../../utils/mysqlPool");
         mysqlPool.getConnection(function (err,connection) {
@@ -51,7 +51,7 @@ module.exports =
 
     getByUserID: function (req,res) {
 
-        var queryString = "select categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price from items join users USING(userID) JOIN categories USING(categoryID) where userID = ? order by itemID desc";
+        var queryString = "select categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price,GROUP_CONCAT(imageName) as imageNames from items join users USING(userID) JOIN categories USING(categoryID) LEFT JOIN images USING(itemID) where userID = ? GROUP BY itemID order by itemID desc";
 
         var mysqlPool = require("../../utils/mysqlPool");
         mysqlPool.getConnection(function (err,connection) {
@@ -97,7 +97,7 @@ module.exports =
 
     getAll: function(req, res){
 
-        var queryString = "SELECT categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price FROM items JOIN users USING(userID) JOIN categories USING(categoryID) order by itemID desc";
+        var queryString = "SELECT categoryID,userID,itemID,itemName,itemDescription,categoryName,username,price,GROUP_CONCAT(imageName order by imageID) as imageNames FROM items JOIN users USING(userID) JOIN categories USING(categoryID) LEFT JOIN images USING(itemID) GROUP BY itemID order by itemID desc";
         var mysqlPool = require("../../utils/mysqlPool");
         mysqlPool.getConnection(function (err,connection) {
             connection.query(queryString,[],function (error,results,fields) {

@@ -14,6 +14,7 @@ module.exports =
                 {
                     console.log("Error is in add item");
                     //throw error;
+                    connection.release();
                     res.send(error);
                 }
                 else{

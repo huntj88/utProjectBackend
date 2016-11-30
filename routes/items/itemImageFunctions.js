@@ -11,7 +11,7 @@ module.exports =
         var fs = require('fs');
         var uuid = require('node-uuid');
 
-        var imageName = uuid.v4();
+        var imageName = uuid.v4()+".jpg";
 
         var form = new formidable.IncomingForm();
 
