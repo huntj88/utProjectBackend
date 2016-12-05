@@ -9,7 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users/users');
 var items = require('./routes/items/items');
 
-var whiteList = ["/items/uploadImage"];
+var whiteList = ["/items/uploadImage","/users/uploadProfileImage"];
 
 var app = express();
 

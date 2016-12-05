@@ -17,4 +17,14 @@ router.post('/login', function (req, res, next) {
     request.login(req, res);
 });
 
+router.post('/getUserData', function (req, res, next) {
+    var request = require('./userFunctions');
+    request.getUserData(req, res);
+});
+
+router.post('/uploadProfileImage', function (req, res, next) {
+    var request = require('./userFunctions');
+    request.uploadImage(req,res);
+});
+
 module.exports = router;
